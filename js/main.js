@@ -49,5 +49,5 @@ const createPhotoDescription = () => ({
   comments: Array.from({length: getRandomData(0, COMMENTS_COUNT)}, createCommentsDescription)
 });
 // Создаем результирующий массив
-const resultDescriptions = Array.from({length: SIMILAR_OBJECT_COUNT}, createPhotoDescription);
-console.log(resultDescriptions);
+const resultDescriptions = () => Array.from({length: SIMILAR_OBJECT_COUNT}, createPhotoDescription);
+console.log(resultDescriptions());

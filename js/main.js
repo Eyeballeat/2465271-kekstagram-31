@@ -48,4 +48,4 @@ const getResultObject = (objectCount, commentCount) => {
   });
   return Array.from({length: objectCount}, createPhotoDescription);
 };
-console.log(getResultObject(25,30));
+getResultObject(25,30);

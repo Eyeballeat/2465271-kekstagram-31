@@ -11,11 +11,11 @@ const numberExtraction = (data) => parseInt(data.toString().replace(/[^\d]/g, ''
 numberExtraction(2023);
 
 const checkWorkingHours = (startTime, endTime, startMeeting, durationMeeting) => {
-  const a = new Date (`May 20, 2022 ${startTime}`);
-  const b = new Date (`May 20, 2022 ${endTime}`);
-  const c = new Date (`May 20, 2022 ${startMeeting}`);
-  return b - a + c * durationMeeting;
-
+  const duration = durationMeeting * 60000;
+  const start = new Date (`2024 ${startTime}`);
+  const end = new Date (`2024 ${endTime}`);
+  const meeting = new Date (`2024 ${startMeeting}`);
+  return meeting >= start && end - meeting >= duration;
 };
-// console.log(checkStringLength('08:0', '14,30', '10:00', 120));
+checkWorkingHours('08:00', '14:30', '14:5', 26);
 

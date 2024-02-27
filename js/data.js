@@ -1,8 +1,7 @@
 import { AUTORS, DESCRIPTIONS, COMMENT_MESSAGES } from './source.js';
-import { getRandomData, createNoRepeatData, getRandomArrayElement } from './transform.js';
+import { getRandomData, createNoRepeatData, getRandomArrayElement } from './util.js';
 
-
-// Создаем функцию возвращающую результат
+// Создаем функцию возвращающую массив объектов со случайными данными
 export const getResultObject = (objectCount, commentCount) => {
   const generateDescriptionID = createNoRepeatData(1, objectCount);
   const generateDescriptionURL = createNoRepeatData(1, objectCount);

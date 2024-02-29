@@ -9,7 +9,7 @@ export const getResultObject = (objectCount, commentCount) => {
 
   const createCommentsDescription = () => ({
     id: generateCommentID(),
-    avatar: `img/avatar-${getRandomData(1, 6)}`,
+    avatar: `img/avatar-${getRandomData(1, 6)}.svg`,
     message: `${getRandomArrayElement(COMMENT_MESSAGES)}`,
     name: `${getRandomArrayElement(AUTORS)}`
   });

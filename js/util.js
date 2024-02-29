@@ -22,3 +22,5 @@ export function createNoRepeatData (min, max) {
 }
 // Создаем функциювозвращающую случайный эемент массива
 export const getRandomArrayElement = (elements) => elements[getRandomData(0, elements.length - 1)];
+// Создаем функцию реакции нажатия клавиши Escape
+export const isEscape = (event) => event.key === 'Escape';

@@ -1,6 +1,8 @@
 import { getResultObject } from './data.js';
+import { setPostsData } from './state.js';
 import { insertImageElement } from './canvas.js';
-export const getArrayOfPosts = getResultObject(25,30);
-insertImageElement(getArrayOfPosts);
-import { renderFullSizeImage } from './render-full-size-img.js';
-renderFullSizeImage(getArrayOfPosts);
+import { validationOfForm } from './form.js';
+const getArrayOfPosts = getResultObject(25,30);
+setPostsData(getArrayOfPosts);
+insertImageElement();
+validationOfForm();

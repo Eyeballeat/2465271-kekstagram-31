@@ -5,6 +5,8 @@ import {
   uploadOverlay,
   textInHashTagInput,
   textInDescriptionInput,
+  uploadPrewiewInput,
+  effectLevelSlider
 }
   from './source.js';
 import {
@@ -14,6 +16,8 @@ import {
   checkCommentOnLength,
 }
   from './util.js';
+import { onImageResizing } from './picture-redactor.js';
+import { sliderEffectHandler } from './effect.js';
 
 const pristine = new Pristine(formForUploadImage, {
   classTo: 'img-upload__field-wrapper',
@@ -29,6 +33,8 @@ const closePictureHandlerWindow = (evt) => {
     uploadOverlay.classList.add('hidden');
     document.body.classList.remove('modal-open');
     uploadImageInput.value = '';
+    uploadPrewiewInput.firstElementChild.style = 'none';
+    effectLevelSlider.classList.add('hidden');
     document.removeEventListener('keydown', closePictureHandlerWindow);
   }
 };
@@ -40,7 +46,7 @@ const sendCurrentPostData = (evt) => {
   }
 };
 
-const definitionHashtag = () => textInHashTagInput.value.split(' ');
+const definitionHashtag = () => textInHashTagInput.value.toLowerCase().split(' ');
 const validationHashtagLength = () => checkHashtagStringLength();
 const validationCommentField = () => checkCommentOnLength(textInDescriptionInput);
 const validationCorrectHashtag = () => checkHashtagOnCorrect(textInHashTagInput);
@@ -62,6 +68,9 @@ const validationOfForm = () => {
     document.addEventListener('keydown', closePictureHandlerWindow);
   });
 };
+
+onImageResizing();
+sliderEffectHandler();
 
 export {
   definitionHashtag,

@@ -1,4 +1,5 @@
 import { definitionHashtag } from './form.js';
+import { MAX_COMMENTS_LENGTH, MESSAGE_COUNT } from './source.js';
 
 // Создаем функцию возвращающую рандомное число
 const getRandomData = (min, max) => {
@@ -42,11 +43,11 @@ const socialCommentBlock = (comment) => {
   return list;
 };
 // Создаем функции для валидации данных введенных в поля комментариев
-const createRegular = (element) => /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/i.test(element);
-const checkCommentOnLength = (string) => string.value.length <= 140;
+const createRegular = (element) => /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/.test(element);
+const checkCommentOnLength = (string) => string.value.length <= MAX_COMMENTS_LENGTH;
 const checkHashtagOnCorrect = (hashtag) => definitionHashtag().every((elem) => hashtag.value.length === 0 || createRegular(elem));
 const checkHashtagOnRepeat = () => new Set(definitionHashtag()).size === definitionHashtag().length;
-const checkHashtagStringLength = () => definitionHashtag().length <= 5;
+const checkHashtagStringLength = () => definitionHashtag().length <= MESSAGE_COUNT;
 
 export {
   getRandomData,

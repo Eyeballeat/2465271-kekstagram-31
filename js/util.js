@@ -67,14 +67,9 @@ const closeAlertOfUpload = (evt) => {
   } if (evt.target === document.body.lastElementChild.lastElementChild) {
     return;
   }
-  // } else if (evt.target === document.body.lastElementChild
-  // || evt.target === document.body.lastElementChild.lastElementChild.lastElementChild
-  // || evt.key === 'Escape') {
-  // console.log(successUploadButtonElement);
-    document.body.lastElementChild.remove();
-    document.body.removeEventListener('click', closeAlertOfUpload);
-    document.body.removeEventListener('keydown', closeAlertOfUpload);
-  // }
+  document.body.lastElementChild.remove();
+  document.body.removeEventListener('click', closeAlertOfUpload);
+  document.body.removeEventListener('keydown', closeAlertOfUpload);
 };
 
 const showAlertOfUpload = (data) => {

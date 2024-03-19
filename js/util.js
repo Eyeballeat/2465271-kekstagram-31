@@ -1,5 +1,15 @@
-import { definitionHashtag } from './form.js';
-import { MAX_COMMENTS_LENGTH, MESSAGE_COUNT } from './source.js';
+import {
+  definitionHashtag
+}
+  from './form.js';
+import {
+  MAX_COMMENTS_LENGTH,
+  MESSAGE_COUNT,
+  // successUploadButtonElement,
+  imageUploadButton,
+  imageUploadButtonText
+}
+  from './source.js';
 
 // Создаем функцию возвращающую рандомное число
 const getRandomData = (min, max) => {
@@ -49,6 +59,51 @@ const checkHashtagOnCorrect = (hashtag) => definitionHashtag().every((elem) => h
 const checkHashtagOnRepeat = () => new Set(definitionHashtag()).size === definitionHashtag().length;
 const checkHashtagStringLength = () => definitionHashtag().length <= MESSAGE_COUNT;
 
+// Показ сообщения об успешной загрузке
+
+const closeAlertOfUpload = (evt) => {
+  if (evt.key === 'Escape') {
+    evt.stopPropagation();
+  } if (evt.target === document.body.lastElementChild.lastElementChild) {
+    return;
+  }
+  // } else if (evt.target === document.body.lastElementChild
+  // || evt.target === document.body.lastElementChild.lastElementChild.lastElementChild
+  // || evt.key === 'Escape') {
+  // console.log(successUploadButtonElement);
+    document.body.lastElementChild.remove();
+    document.body.removeEventListener('click', closeAlertOfUpload);
+    document.body.removeEventListener('keydown', closeAlertOfUpload);
+  // }
+};
+
+const showAlertOfUpload = (data) => {
+  const template = data.cloneNode(true);
+  document.body.append(template);
+  document.body.addEventListener('click', closeAlertOfUpload);
+  document.body.addEventListener('keydown', closeAlertOfUpload);
+};
+
+const closeAlertOfLoad = () => {
+  document.body.lastElementChild.remove();
+};
+
+const showAlertOfLoad = (data) => {
+  const template = data.cloneNode(true);
+  document.body.append(template);
+  setTimeout(closeAlertOfLoad, 5000);
+};
+
+const blockSubmitButton = () => {
+  imageUploadButton.disabled = true;
+  imageUploadButton.textContent = imageUploadButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  imageUploadButton.disabled = false;
+  imageUploadButton.textContent = imageUploadButtonText.IDLE;
+};
+
 export {
   getRandomData,
   createNoRepeatData,
@@ -57,5 +112,10 @@ export {
   checkHashtagStringLength,
   checkHashtagOnCorrect,
   checkHashtagOnRepeat,
-  checkCommentOnLength
+  checkCommentOnLength,
+  showAlertOfUpload,
+  closeAlertOfUpload,
+  showAlertOfLoad,
+  blockSubmitButton,
+  unblockSubmitButton
 };

@@ -118,6 +118,16 @@ const effects = {
   }
 };
 
+const errorUploadMessageElement = document.querySelector('#error').content;
+const successUploadMessageElement = document.querySelector('#success').content;
+const errorUploadUserImageElement = document.querySelector('#data-error').content;
+const errorUploadButtonElement = document.querySelector('.error__button');
+const successUploadButtonElement = document.querySelector('.success__button');
+const imageUploadButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
+
 export {
   AUTORS,
   DESCRIPTIONS,
@@ -158,5 +168,11 @@ export {
   effectRadioButton,
   NonEffectButton,
   effectList,
-  effects
+  effects,
+  errorUploadMessageElement,
+  successUploadMessageElement,
+  errorUploadUserImageElement,
+  errorUploadButtonElement,
+  successUploadButtonElement,
+  imageUploadButtonText
 };

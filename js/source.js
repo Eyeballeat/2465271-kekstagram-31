@@ -7,6 +7,7 @@ const PICTURE_SCALE_STEP = 25;
 const FULL_IMAGE_SIZE = 100;
 const MAX_COMMENTS_LENGTH = 140;
 const MIN_IMAGE_SIZE = 25;
+const RERENDER_DELAY = 500;
 
 const templatePictureFragment = document.querySelector('#picture').content;
 const pictureContainer = document.querySelector('.pictures');
@@ -128,6 +129,9 @@ const imageUploadButtonText = {
   SENDING: 'Публикую...'
 };
 
+const imageFiltersElement = document.querySelector('.img-filters');
+const imageFilterFormElement = document.querySelector('.img-filters__form');
+
 export {
   AUTORS,
   DESCRIPTIONS,
@@ -137,6 +141,7 @@ export {
   FULL_IMAGE_SIZE,
   MAX_COMMENTS_LENGTH,
   MIN_IMAGE_SIZE,
+  RERENDER_DELAY,
   templatePictureFragment,
   pictureContainer,
   bigPicture,
@@ -174,5 +179,7 @@ export {
   errorUploadUserImageElement,
   errorUploadButtonElement,
   successUploadButtonElement,
-  imageUploadButtonText
+  imageUploadButtonText,
+  imageFiltersElement,
+  imageFilterFormElement
 };

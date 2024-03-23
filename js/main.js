@@ -8,3 +8,5 @@ import { getData } from './api.js';
 getData();
 // insertImageElement();
 // validationOfForm();
+// import { sortByRandomId } from './image-filter.js';
+// sortByRandomId();

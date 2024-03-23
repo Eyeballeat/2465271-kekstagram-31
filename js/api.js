@@ -1,37 +1,52 @@
-import { setPostsData } from './state.js';
 import { insertImageElement } from './canvas.js';
-import { validationOfForm, closePictureHandlerWindow } from './form.js';
-import { errorUploadMessageElement, successUploadMessageElement, errorUploadUserImageElement } from './source.js';
-import { showAlertOfUpload, showAlertOfLoad, unblockSubmitButton } from './util.js';
+import { showPictureFilterElement } from './image-filter.js';
+import { setPostsData } from './state.js';
+import {
+  validationOfForm,
+  closePictureHandlerWindow
+}
+  from './form.js';
+import {
+  errorUploadMessageElement,
+  successUploadMessageElement,
+  errorUploadUserImageElement,
+}
+  from './source.js';
+import {
+  showAlertOfUpload,
+  showAlertOfLoad,
+  unblockSubmitButton,
+}
+  from './util.js';
 
-const getData = () => {
-  fetch('https://31.javascript.htmlacademy.pro/kekstagram/data')
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-    })
-    .then((data) => {
-      setPostsData(data);
-      insertImageElement();
-      validationOfForm();
-    }).catch (() => showAlertOfLoad(errorUploadUserImageElement));
+const getData = async (cb, number) => {
+  try {
+    const response = await fetch('https://31.javascript.htmlacademy.pro/kekstagram/data');
+    const data = await response.json();
+    setPostsData(data);
+    insertImageElement(data, cb, number);
+    validationOfForm();
+    showPictureFilterElement();
+  } catch (e) {
+    showAlertOfLoad(errorUploadUserImageElement);
+  }
 };
 
-const sendData = (evt) => {
-  const formData = new FormData(evt.target);
-  fetch('https://31.javascript.htmlacademy.pro/kekstagram',
-    {
-      method: 'POST',
-      body: formData,
-    },
-  ).then((response) => {
-    if (response.ok) {
-      showAlertOfUpload(successUploadMessageElement);
-      closePictureHandlerWindow(evt);
-    }
-  }). catch (() => showAlertOfUpload(errorUploadMessageElement))
-    .finally(unblockSubmitButton);
+const sendData = async (evt) => {
+  try {
+    const formData = new FormData(evt.target);
+    await fetch('https://31.javascript.htmlacademy.pro/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      });
+    showAlertOfUpload(successUploadMessageElement);
+    closePictureHandlerWindow(evt);
+  } catch (e) {
+    showAlertOfUpload(errorUploadMessageElement);
+  } finally {
+    unblockSubmitButton();
+  }
 };
 
 export {

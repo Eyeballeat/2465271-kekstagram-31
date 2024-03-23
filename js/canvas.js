@@ -1,9 +1,11 @@
-import { pictureContainer, templatePictureFragment } from './source.js';
-import { state } from './state.js';
+import { pictureContainer,
+  templatePictureFragment
+}
+  from './source.js';
 import { onClickOnPost } from './render-full-size-img.js';
 
-export const insertImageElement = () => {
-  state.posts.forEach ((postElement) => {
+export const insertImageElement = (data, cb, number) => {
+  data.slice().sort(cb).slice(number).forEach ((postElement) => {
     const template = templatePictureFragment.cloneNode(true);
     const link = template.querySelector('a');
     const image = template.querySelector('.picture__img');

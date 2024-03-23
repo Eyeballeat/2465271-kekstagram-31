@@ -5,9 +5,9 @@ import {
 import {
   MAX_COMMENTS_LENGTH,
   MESSAGE_COUNT,
-  // successUploadButtonElement,
   imageUploadButton,
-  imageUploadButtonText
+  imageUploadButtonText,
+  imageFiltersElement
 }
   from './source.js';
 
@@ -99,6 +99,18 @@ const unblockSubmitButton = () => {
   imageUploadButton.textContent = imageUploadButtonText.IDLE;
 };
 
+const showImageFilter = () => {
+  imageFiltersElement.classList.remove('img-filters--inactive');
+};
+
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   getRandomData,
   createNoRepeatData,
@@ -112,5 +124,7 @@ export {
   closeAlertOfUpload,
   showAlertOfLoad,
   blockSubmitButton,
-  unblockSubmitButton
+  unblockSubmitButton,
+  showImageFilter,
+  debounce
 };

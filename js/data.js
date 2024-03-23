@@ -1,5 +1,13 @@
-import { AUTORS, DESCRIPTIONS, COMMENT_MESSAGES } from './source.js';
-import { getRandomData, createNoRepeatData, getRandomArrayElement } from './util.js';
+import { AUTORS,
+  DESCRIPTIONS,
+  COMMENT_MESSAGES
+}
+  from './source.js';
+import { getRandomData,
+  createNoRepeatData,
+  getRandomArrayElement
+}
+  from './util.js';
 
 // Создаем функцию возвращающую массив объектов со случайными данными
 export const getResultObject = (objectCount, commentCount) => {

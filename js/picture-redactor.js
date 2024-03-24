@@ -2,31 +2,31 @@ import {
   PICTURE_SCALE_STEP,
   FULL_IMAGE_SIZE,
   MIN_IMAGE_SIZE,
-  uploadPrewiewInput,
-  scaleSmallerButton,
-  scaleBiggerButton,
-  scaleValueField,
-  imageScaleForm
+  uploadPrewiewInputElement,
+  scaleSmallerButtonElement,
+  scaleBiggerButtonElement,
+  scaleValueFieldElement,
+  imageScaleFormElement
 }
   from './source.js';
 
 const getCurrentScaleValue = (value) => {
-  let currentScaleValue = parseInt(scaleValueField.value, 10);
+  let currentScaleValue = parseInt(scaleValueFieldElement.value, 10);
   currentScaleValue += value;
-  scaleValueField.value = `${currentScaleValue}%`;
-  uploadPrewiewInput.firstElementChild.style.transform = `scale(${currentScaleValue / 100})`;
+  scaleValueFieldElement.value = `${currentScaleValue}%`;
+  uploadPrewiewInputElement.firstElementChild.style.transform = `scale(${currentScaleValue / 100})`;
 };
 
-export const onImageResizing = () => {
-  imageScaleForm.addEventListener('click', (evt) => {
-    if (evt.target === scaleSmallerButton) {
-      if (scaleValueField.value === `${MIN_IMAGE_SIZE}%`) {
+export const changePictureSize = () => {
+  imageScaleFormElement.addEventListener('click', (evt) => {
+    if (evt.target === scaleSmallerButtonElement) {
+      if (scaleValueFieldElement.value === `${MIN_IMAGE_SIZE}%`) {
         return;
       }
       getCurrentScaleValue(-PICTURE_SCALE_STEP);
     }
-    if (evt.target === scaleBiggerButton) {
-      if (scaleValueField.value === `${FULL_IMAGE_SIZE}%`) {
+    if (evt.target === scaleBiggerButtonElement) {
+      if (scaleValueFieldElement.value === `${FULL_IMAGE_SIZE}%`) {
         return;
       }
       getCurrentScaleValue(PICTURE_SCALE_STEP);

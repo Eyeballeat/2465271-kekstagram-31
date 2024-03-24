@@ -8,43 +8,41 @@ const FULL_IMAGE_SIZE = 100;
 const MAX_COMMENTS_LENGTH = 140;
 const MIN_IMAGE_SIZE = 25;
 const RERENDER_DELAY = 500;
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'svg'];
 
-const templatePictureFragment = document.querySelector('#picture').content;
-const pictureContainer = document.querySelector('.pictures');
+const templatePictureFragmentElement = document.querySelector('#picture').content;
+const pictureContainerElement = document.querySelector('.pictures');
 
-const bigPicture = document.querySelector('.big-picture');
-const bigPictureImage = bigPicture.querySelector('.big-picture__img').firstElementChild;
-const likesCount = bigPicture.querySelector('.likes-count');
-const shownCommentCount = bigPicture.querySelector('.social__comment-shown-count');
-const commentTotalCount = bigPicture.querySelector('.social__comment-total-count');
-const socialComment = bigPicture.querySelector('.social__comments');
-const socialCaption = bigPicture.querySelector('.social__caption');
-const loaderButton = bigPicture.querySelector('.social__comments-loader');
-const closerButton = bigPicture.querySelector('.big-picture__cancel');
+const bigPictureElement = document.querySelector('.big-picture');
+const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__img').firstElementChild;
+const likesCountElement = bigPictureElement.querySelector('.likes-count');
+const shownCommentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
+const commentTotalCountElement = bigPictureElement.querySelector('.social__comment-total-count');
+const socialCommentElement = bigPictureElement.querySelector('.social__comments');
+const socialCaptionElement = bigPictureElement.querySelector('.social__caption');
+const loaderButtonElement = bigPictureElement.querySelector('.social__comments-loader');
+const closerButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
-const formForUploadImage = document.querySelector('.img-upload__form');
-const uploadImageInput = formForUploadImage.querySelector('.img-upload__input');
-const uploadPrewiewInput = formForUploadImage.querySelector('.img-upload__preview');
-const uploadOverlay = formForUploadImage.querySelector('.img-upload__overlay');
-const textInHashTagInput = formForUploadImage.querySelector('.text__hashtags');
-const textInDescriptionInput = formForUploadImage.querySelector('.text__description');
-const imageScaleInput = formForUploadImage.querySelector('.scale__control');
-const buttonForCancel = formForUploadImage.querySelector('.img-upload__cancel');
-const imageFieldWrapper = formForUploadImage.querySelector('.img-upload__field-wrapper');
-const imageUploadButton = formForUploadImage.querySelector('.img-upload__submit');
+const formForUploadImageElement = document.querySelector('.img-upload__form');
+const uploadImageInputElement = formForUploadImageElement.querySelector('.img-upload__input');
+const uploadPrewiewInputElement = formForUploadImageElement.querySelector('.img-upload__preview');
+const uploadOverlayElement = formForUploadImageElement.querySelector('.img-upload__overlay');
+const textInHashTagInputElement = formForUploadImageElement.querySelector('.text__hashtags');
+const textInDescriptionInputElement = formForUploadImageElement.querySelector('.text__description');
+const buttonForCancelElement = formForUploadImageElement.querySelector('.img-upload__cancel');
+const imageUploadButtonElement = formForUploadImageElement.querySelector('.img-upload__submit');
 
-const scaleSmallerButton = formForUploadImage.querySelector('.scale__control--smaller');
-const scaleBiggerButton = formForUploadImage.querySelector('.scale__control--bigger');
-const scaleValueField = formForUploadImage.querySelector('.scale__control--value');
-const effectValueField = formForUploadImage.querySelector('.effect-level__value');
-const imageScaleForm = formForUploadImage.querySelector('.img-upload__scale');
+const scaleSmallerButtonElement = formForUploadImageElement.querySelector('.scale__control--smaller');
+const scaleBiggerButtonElement = formForUploadImageElement.querySelector('.scale__control--bigger');
+const scaleValueFieldElement = formForUploadImageElement.querySelector('.scale__control--value');
+const imageScaleFormElement = formForUploadImageElement.querySelector('.img-upload__scale');
 
-const effectLevelSlider = formForUploadImage.querySelector('.effect-level__slider');
-const effectLevelValue = formForUploadImage.querySelector('.effect-level__value');
-const effectRadioButton = formForUploadImage.querySelectorAll('.effects__radio');
-const NonEffectButton = formForUploadImage.querySelector('#effect-none');
-const effectList = formForUploadImage.querySelector('.effects__list');
-const effects = {
+const effectLevelSliderElement = formForUploadImageElement.querySelector('.effect-level__slider');
+const effectLevelValueElement = formForUploadImageElement.querySelector('.effect-level__value');
+const effectRadioButtonElement = formForUploadImageElement.querySelectorAll('.effects__radio');
+const nonEffectButtonElement = formForUploadImageElement.querySelector('#effect-none');
+const effectListElement = formForUploadImageElement.querySelector('.effects__list');
+const Effects = {
   chrome: {
     range: {
       min: 0,
@@ -142,38 +140,36 @@ export {
   MAX_COMMENTS_LENGTH,
   MIN_IMAGE_SIZE,
   RERENDER_DELAY,
-  templatePictureFragment,
-  pictureContainer,
-  bigPicture,
-  bigPictureImage,
-  likesCount,
-  shownCommentCount,
-  commentTotalCount,
-  socialComment,
-  socialCaption,
-  loaderButton,
-  closerButton,
-  formForUploadImage,
-  uploadImageInput,
-  uploadPrewiewInput,
-  uploadOverlay,
-  textInHashTagInput,
-  textInDescriptionInput,
-  imageScaleInput,
-  buttonForCancel,
-  imageFieldWrapper,
-  imageUploadButton,
-  scaleSmallerButton,
-  scaleBiggerButton,
-  scaleValueField,
-  effectValueField,
-  imageScaleForm,
-  effectLevelSlider,
-  effectLevelValue,
-  effectRadioButton,
-  NonEffectButton,
-  effectList,
-  effects,
+  FILE_TYPES,
+  templatePictureFragmentElement,
+  pictureContainerElement,
+  bigPictureElement,
+  bigPictureImageElement,
+  likesCountElement,
+  shownCommentCountElement,
+  commentTotalCountElement,
+  socialCommentElement,
+  socialCaptionElement,
+  loaderButtonElement,
+  closerButtonElement,
+  formForUploadImageElement,
+  uploadImageInputElement,
+  uploadPrewiewInputElement,
+  uploadOverlayElement,
+  textInHashTagInputElement,
+  textInDescriptionInputElement,
+  buttonForCancelElement,
+  imageUploadButtonElement,
+  scaleSmallerButtonElement,
+  scaleBiggerButtonElement,
+  scaleValueFieldElement,
+  imageScaleFormElement,
+  effectLevelSliderElement,
+  effectLevelValueElement,
+  effectRadioButtonElement,
+  nonEffectButtonElement,
+  effectListElement,
+  Effects,
   errorUploadMessageElement,
   successUploadMessageElement,
   errorUploadUserImageElement,

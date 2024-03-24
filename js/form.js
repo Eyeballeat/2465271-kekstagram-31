@@ -1,14 +1,16 @@
 import {
-  formForUploadImage,
-  buttonForCancel,
-  uploadImageInput,
-  uploadOverlay,
-  textInHashTagInput,
-  textInDescriptionInput,
-  uploadPrewiewInput,
-  effectLevelSlider,
-  NonEffectButton,
-  scaleValueField,
+  formForUploadImageElement,
+  buttonForCancelElement,
+  uploadImageInputElement,
+  uploadOverlayElement,
+  textInHashTagInputElement,
+  textInDescriptionInputElement,
+  uploadPrewiewInputElement,
+  effectLevelSliderElement,
+  nonEffectButtonElement,
+  scaleValueFieldElement,
+  imageUploadButtonElement,
+  imageUploadButtonText,
   FULL_IMAGE_SIZE,
 }
   from './source.js';
@@ -17,46 +19,54 @@ import {
   checkHashtagOnCorrect,
   checkHashtagOnRepeat,
   checkCommentOnLength,
-  blockSubmitButton
 }
   from './util.js';
-import { onImageResizing } from './picture-redactor.js';
-import { sliderEffectHandler } from './effect.js';
+import { changePictureSize } from './picture-redactor.js';
+import { changePictureEffect } from './effect.js';
 import { sendData } from './api.js';
+import { loadUserImage } from './user-image.js';
 
-const pristine = new Pristine(formForUploadImage, {
+const pristine = new Pristine(formForUploadImageElement, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
   errorTextClass: 'img-upload__field-wrapper--error'
 }, true);
 
-const definitionHashtag = () => textInHashTagInput.value.toLowerCase().split(' ');
+const definitionHashtag = () => textInHashTagInputElement.value.toLowerCase().split(' ');
 const validationHashtagLength = () => checkHashtagStringLength();
-const validationCommentField = () => checkCommentOnLength(textInDescriptionInput);
-const validationCorrectHashtag = () => checkHashtagOnCorrect(textInHashTagInput);
+const validationCommentField = () => checkCommentOnLength(textInDescriptionInputElement);
+const validationCorrectHashtag = () => checkHashtagOnCorrect(textInHashTagInputElement);
 const validationNoRepeatHashtag = () => checkHashtagOnRepeat();
 
-pristine.addValidator(textInHashTagInput, validationHashtagLength, 'превышено количество хэштегов');
-pristine.addValidator(textInDescriptionInput, validationCommentField, 'длина комментария больше 140 символов');
-pristine.addValidator(textInHashTagInput, validationCorrectHashtag, 'введён невалидный хэштег');
-pristine.addValidator(textInHashTagInput, validationNoRepeatHashtag, 'хэштеги повторяются');
+pristine.addValidator(textInHashTagInputElement, validationHashtagLength, 'превышено количество хэштегов');
+pristine.addValidator(textInDescriptionInputElement, validationCommentField, 'длина комментария больше 140 символов');
+pristine.addValidator(textInHashTagInputElement, validationCorrectHashtag, 'введён невалидный хэштег');
+pristine.addValidator(textInHashTagInputElement, validationNoRepeatHashtag, 'хэштеги повторяются');
 
 const closePictureHandlerWindow = (evt) => {
-  if (evt.target === textInHashTagInput || evt.target === textInDescriptionInput) {
+  if (evt.target === textInHashTagInputElement
+    || evt.target === textInDescriptionInputElement) {
     evt.stopPropagation();
-  } else if (evt.target === buttonForCancel || evt.key === 'Escape' || evt.target === formForUploadImage) {
-    uploadOverlay.classList.add('hidden');
+  } else if (evt.target === buttonForCancelElement
+    || evt.key === 'Escape'
+    || evt.target === formForUploadImageElement) {
+    uploadOverlayElement.classList.add('hidden');
     document.body.classList.remove('modal-open');
-    textInHashTagInput.value = '';
-    textInDescriptionInput.value = '';
-    uploadImageInput.value = '';
-    uploadPrewiewInput.firstElementChild.style = 'none';
-    scaleValueField.value = `${FULL_IMAGE_SIZE}%`;
-    NonEffectButton.checked = 'checked';
-    effectLevelSlider.classList.add('hidden');
+    textInHashTagInputElement.value = '';
+    textInDescriptionInputElement.value = '';
+    uploadImageInputElement.value = '';
+    uploadPrewiewInputElement.firstElementChild.style = 'none';
+    scaleValueFieldElement.value = `${FULL_IMAGE_SIZE}%`;
+    nonEffectButtonElement.checked = 'checked';
+    effectLevelSliderElement.classList.add('hidden');
     document.removeEventListener('keydown', closePictureHandlerWindow);
   }
+};
+
+const blockSubmitButton = () => {
+  imageUploadButtonElement.disabled = true;
+  imageUploadButtonElement.textContent = imageUploadButtonText.SENDING;
 };
 
 const sendCurrentPostData = (evt) => {
@@ -69,19 +79,20 @@ const sendCurrentPostData = (evt) => {
 };
 
 const validationOfForm = () => {
-  formForUploadImage.addEventListener('change', () => {
-    uploadOverlay.classList.remove('hidden');
+  formForUploadImageElement.addEventListener('change', () => {
+    uploadOverlayElement.classList.remove('hidden');
     document.body.classList.add('modal-open');
-    formForUploadImage.addEventListener('submit', sendCurrentPostData);
-    textInHashTagInput.addEventListener('focus', closePictureHandlerWindow);
-    textInDescriptionInput.addEventListener('focus', closePictureHandlerWindow);
-    buttonForCancel.addEventListener('click', closePictureHandlerWindow);
+    loadUserImage();
+    formForUploadImageElement.addEventListener('submit', sendCurrentPostData);
+    textInHashTagInputElement.addEventListener('focus', closePictureHandlerWindow);
+    textInDescriptionInputElement.addEventListener('focus', closePictureHandlerWindow);
+    buttonForCancelElement.addEventListener('click', closePictureHandlerWindow);
     document.addEventListener('keydown', closePictureHandlerWindow);
   });
 };
 
-onImageResizing();
-sliderEffectHandler();
+changePictureSize();
+changePictureEffect();
 
 export {
   definitionHashtag,

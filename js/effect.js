@@ -1,43 +1,42 @@
 import {
-  effectLevelSlider,
-  effectLevelValue,
-  effectRadioButton,
-  NonEffectButton,
-  uploadPrewiewInput,
-  effectList,
-  effects
+  effectLevelSliderElement,
+  effectLevelValueElement,
+  effectRadioButtonElement,
+  nonEffectButtonElement,
+  uploadPrewiewInputElement,
+  effectListElement,
+  Effects
 } from './source.js';
 
 const createFilterOnElement = () => {
   let checkedElement;
-  effectRadioButton.forEach((elem) => {
+  effectRadioButtonElement.forEach((elem) => {
     if (elem.checked) {
       checkedElement = elem.value;
     }
   }); return checkedElement;
 };
 
-const currentEffectData = () => effects[createFilterOnElement()];
-const createCurrentSlider = () => effectLevelSlider.noUiSlider.updateOptions(currentEffectData());
+const getCurrentEffectData = () => Effects[createFilterOnElement()];
+const createCurrentSlider = () => effectLevelSliderElement.noUiSlider.updateOptions(getCurrentEffectData());
 
-export const sliderEffectHandler = () => {
-  noUiSlider.create(effectLevelSlider, effects.none);
-  effectLevelSlider.classList.add('hidden');
-  effectLevelSlider.noUiSlider.on('update', () => {
-    effectLevelValue.value = effectLevelSlider.noUiSlider.get();
-    uploadPrewiewInput.firstElementChild.style.filter = `${currentEffectData().style(effectLevelValue.value)}`;
+export const changePictureEffect = () => {
+  noUiSlider.create(effectLevelSliderElement, Effects.none);
+  effectLevelSliderElement.classList.add('hidden');
+  effectLevelSliderElement.noUiSlider.on('update', () => {
+    effectLevelValueElement.value = effectLevelSliderElement.noUiSlider.get();
+    uploadPrewiewInputElement.firstElementChild.style.filter = `${getCurrentEffectData().style(effectLevelValueElement.value)}`;
   });
-
-  const onEffectChange = (evt) => {
-    if (evt.target === NonEffectButton) {
-      effectLevelSlider.classList.add('hidden');
-      uploadPrewiewInput.firstElementChild.style.filter = 'none';
+  const onEffectListChange = (evt) => {
+    if (evt.target === nonEffectButtonElement) {
+      effectLevelSliderElement.classList.add('hidden');
+      uploadPrewiewInputElement.firstElementChild.style.filter = 'none';
     } else {
-      effectLevelSlider.classList.remove('hidden');
+      effectLevelSliderElement.classList.remove('hidden');
     }
-    effectLevelSlider.noUiSlider.set(0);
+    effectLevelSliderElement.noUiSlider.set(0);
     createCurrentSlider();
 
   };
-  effectList.addEventListener('change', onEffectChange);
+  effectListElement.addEventListener('change', onEffectListChange);
 };

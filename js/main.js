@@ -1,12 +1,2 @@
-// import { getResultObject } from './data.js';
-// import { setPostsData } from './state.js';
-// import { insertImageElement } from './canvas.js';
-// import { validationOfForm } from './form.js';
 import { getData } from './api.js';
-// const getArrayOfPosts = getResultObject(25,30);
-// setPostsData(getArrayOfPosts);
 getData();
-// insertImageElement();
-// validationOfForm();
-// import { sortByRandomId } from './image-filter.js';
-// sortByRandomId();

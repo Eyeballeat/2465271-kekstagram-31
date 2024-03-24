@@ -1,12 +1,14 @@
 import { getData } from './api.js';
 
-import { imageFilterFormElement,
-  pictureContainer,
+import {
+  imageFilterFormElement,
+  pictureContainerElement,
+  imageFiltersElement,
   RERENDER_DELAY
 }
   from './source.js';
 
-import { showImageFilter,
+import {
   createNoRepeatData,
   debounce
 }
@@ -26,8 +28,12 @@ const sortByRandomId = () => {
   return elementA - elementB;
 };
 
+const showImageFilter = () => {
+  imageFiltersElement.classList.remove('img-filters--inactive');
+};
+
 const clearPicturesContainer = () => {
-  pictureContainer.querySelectorAll('.picture').forEach((elem) => {
+  pictureContainerElement.querySelectorAll('.picture').forEach((elem) => {
     elem.remove();
   });
 };

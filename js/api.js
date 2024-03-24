@@ -10,14 +10,44 @@ import {
   errorUploadMessageElement,
   successUploadMessageElement,
   errorUploadUserImageElement,
+  imageUploadButtonElement,
+  imageUploadButtonText,
 }
   from './source.js';
-import {
-  showAlertOfUpload,
-  showAlertOfLoad,
-  unblockSubmitButton,
-}
-  from './util.js';
+
+const closeAlertOfUpload = (evt) => {
+  if (evt.key === 'Escape') {
+    evt.stopPropagation();
+  } if (evt.target === document.querySelector('.success__inner')
+  || evt.target === document.querySelector('.success__title')) {
+    return;
+  }
+  document.body.lastElementChild.remove();
+  document.body.removeEventListener('click', closeAlertOfUpload);
+  document.body.removeEventListener('keydown', closeAlertOfUpload);
+};
+
+const showAlertOfUpload = (data) => {
+  const template = data.cloneNode(true);
+  document.body.append(template);
+  document.body.addEventListener('click', closeAlertOfUpload);
+  document.body.addEventListener('keydown', closeAlertOfUpload);
+};
+
+const closeAlertOfLoad = () => {
+  document.body.lastElementChild.remove();
+};
+
+const showAlertOfLoad = (data) => {
+  const template = data.cloneNode(true);
+  document.body.append(template);
+  setTimeout(closeAlertOfLoad, 5000);
+};
+
+const unblockSubmitButton = () => {
+  imageUploadButtonElement.disabled = false;
+  imageUploadButtonElement.textContent = imageUploadButtonText.IDLE;
+};
 
 const getData = async (cb, number) => {
   try {

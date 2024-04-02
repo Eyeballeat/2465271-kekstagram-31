@@ -3,11 +3,15 @@ const AUTORS = ['Артем', 'Андрей', 'Сергей', 'Владимир'
 const DESCRIPTIONS = ['Красота!', 'Вау!', 'Класс!', 'Обожаю!', 'Без комментариев', 'Лучше промолчать!', 'Комментарии здесь излишни!', 'Очень интересная фотография!'];
 const COMMENT_MESSAGES = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 const MESSAGE_COUNT = 5;
+const MIN_LIKES_COUNT = 15;
+const MAX_LIKES_COUNT = 200;
 const PICTURE_SCALE_STEP = 25;
 const FULL_IMAGE_SIZE = 100;
 const MAX_COMMENTS_LENGTH = 140;
 const MIN_IMAGE_SIZE = 25;
 const RERENDER_DELAY = 500;
+const MAX_SHOWER_PHOTO = 10;
+const ERROR_SHOW_TIME = 5000;
 const FILE_TYPES = ['jpg', 'jpeg', 'png', 'svg'];
 
 const templatePictureFragmentElement = document.querySelector('#picture').content;
@@ -31,6 +35,8 @@ const textInHashTagInputElement = formForUploadImageElement.querySelector('.text
 const textInDescriptionInputElement = formForUploadImageElement.querySelector('.text__description');
 const buttonForCancelElement = formForUploadImageElement.querySelector('.img-upload__cancel');
 const imageUploadButtonElement = formForUploadImageElement.querySelector('.img-upload__submit');
+const imageEffectLevelElement = formForUploadImageElement.querySelector('.img-upload__effect-level');
+const effectPreviewElement = formForUploadImageElement.querySelectorAll('.effects__preview');
 
 const scaleSmallerButtonElement = formForUploadImageElement.querySelector('.scale__control--smaller');
 const scaleBiggerButtonElement = formForUploadImageElement.querySelector('.scale__control--bigger');
@@ -117,9 +123,9 @@ const Effects = {
   }
 };
 
-const errorUploadMessageElement = document.querySelector('#error').content;
-const successUploadMessageElement = document.querySelector('#success').content;
-const errorUploadUserImageElement = document.querySelector('#data-error').content;
+const errorUploadTitleElement = document.querySelector('.error__title');
+const successUploadTitleElement = document.querySelector('.success__title');
+const errorTitleElement = document.querySelector('data-error__title');
 const errorUploadButtonElement = document.querySelector('.error__button');
 const successUploadButtonElement = document.querySelector('.success__button');
 const imageUploadButtonText = {
@@ -135,11 +141,15 @@ export {
   DESCRIPTIONS,
   COMMENT_MESSAGES,
   MESSAGE_COUNT,
+  MIN_LIKES_COUNT,
+  MAX_LIKES_COUNT,
   PICTURE_SCALE_STEP,
   FULL_IMAGE_SIZE,
   MAX_COMMENTS_LENGTH,
   MIN_IMAGE_SIZE,
   RERENDER_DELAY,
+  ERROR_SHOW_TIME,
+  MAX_SHOWER_PHOTO,
   FILE_TYPES,
   templatePictureFragmentElement,
   pictureContainerElement,
@@ -164,15 +174,17 @@ export {
   scaleBiggerButtonElement,
   scaleValueFieldElement,
   imageScaleFormElement,
+  imageEffectLevelElement,
   effectLevelSliderElement,
   effectLevelValueElement,
   effectRadioButtonElement,
   nonEffectButtonElement,
   effectListElement,
+  effectPreviewElement,
   Effects,
-  errorUploadMessageElement,
-  successUploadMessageElement,
-  errorUploadUserImageElement,
+  errorUploadTitleElement,
+  successUploadTitleElement,
+  errorTitleElement,
   errorUploadButtonElement,
   successUploadButtonElement,
   imageUploadButtonText,

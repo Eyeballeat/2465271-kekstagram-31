@@ -1,6 +1,8 @@
 import { AUTORS,
   DESCRIPTIONS,
-  COMMENT_MESSAGES
+  COMMENT_MESSAGES,
+  MIN_LIKES_COUNT,
+  MAX_LIKES_COUNT
 }
   from './source.js';
 import { getRandomData,
@@ -26,7 +28,7 @@ export const getResultObject = (objectCount, commentCount) => {
     id: generateDescriptionID(),
     url: `photos/${generateDescriptionURL()}.jpg`,
     description: `${getRandomArrayElement(DESCRIPTIONS)}`,
-    likes: getRandomData(15,200),
+    likes: getRandomData(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
     comments: Array.from({length: getRandomData(0, commentCount)}, createCommentsDescription)
   });
   return Array.from({length: objectCount}, createPhotoDescription);

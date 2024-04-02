@@ -2,10 +2,10 @@ import { pictureContainerElement,
   templatePictureFragmentElement
 }
   from './source.js';
-import { onClickOnPost } from './render-full-size-img.js';
-
-export const insertImageElement = (data, cb, number) => {
-  data.slice().sort(cb).slice(number).forEach ((postElement) => {
+import { onPostClick } from './full-size-image-renderer.js';
+// Создаем функцию для вставки изображений полученных с сервера на страницу
+export const insertImageElement = (data) => {
+  data.forEach ((postElement) => {
     const template = templatePictureFragmentElement.cloneNode(true);
     const link = template.querySelector('a');
     const image = template.querySelector('.picture__img');
@@ -18,7 +18,7 @@ export const insertImageElement = (data, cb, number) => {
     like.innerText = postElement.likes;
     pictureContainerElement.append(template);
     link.addEventListener('click', () => {
-      onClickOnPost(postElement.id);
+      onPostClick(postElement.id);
     });
   });
 };

@@ -19,28 +19,44 @@ import {
   getCommentsFromCurrentPost,
   clearStateData
 }
-  from './state.js';
-import { socialCommentBlock } from './util.js';
-
-const closeBigPicture = (evt) => {
+  from './user-state.js';
+// Создаем функцию закрытия показа окна полноэкранного просмотра изображения
+const onCloseBigPicture = (evt) => {
   if (evt.target === closerButtonElement || evt.key === 'Escape') {
     evt.preventDefault();
     bigPictureElement.classList.add('hidden');
     document.body.classList.remove('modal-open');
     socialCommentElement.innerHTML = '';
     clearStateData();
-    document.removeEventListener('keydown', closeBigPicture);
+    document.removeEventListener('keydown', onCloseBigPicture);
   }
 };
-
+// Создаем функцию инициализации блока изображения с комментариями
+const socialCommentBlock = (comment) => {
+  const list = document.createElement('li');
+  const image = document.createElement('img');
+  const paragraph = document.createElement('p');
+  list.classList.add('social__comment');
+  image.classList.add('social__picture');
+  paragraph.classList.add('social__text');
+  image.src = comment.avatar;
+  image.alt = comment.name;
+  image.style.width = 35;
+  image.style.height = 35;
+  paragraph.textContent = comment.message;
+  list.append(image);
+  list.append(paragraph);
+  return list;
+};
+// Создаем функцию загрузки блока комментариев
 const downloadComments = (start, finish) => {
   getCommentsFromCurrentPost().slice(start, finish)
     .forEach((el) => {
       socialCommentElement.append(socialCommentBlock(el));
     });
 };
-
-const loadMoreComments = () => {
+// Создаем функцию загрузки порции комментариев
+const loadComments = () => {
   const currentCommentLength = getCommentsFromCurrentPost().length;
   const curentValueOfComments = state.currentComments;
   if (curentValueOfComments < currentCommentLength - MESSAGE_COUNT) {
@@ -53,8 +69,10 @@ const loadMoreComments = () => {
   downloadComments(curentValueOfComments, state.currentComments);
   shownCommentCountElement.textContent = state.currentComments;
 };
-
-export const onClickOnPost = (post) => {
+// Создаем колбэк загрузки дополнительных комментариев по клику
+const onLoadMoreCommentsClick = () => loadComments();
+// Создаем колбэк инициализации поста
+export const onPostClick = (post) => {
   const picture = getPostbyId(post);
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -66,8 +84,8 @@ export const onClickOnPost = (post) => {
   setCurrentPostData(post);
   getCommentsFromCurrentPost();
   setCurrentCommentsData(0);
-  loadMoreComments();
-  loaderButtonElement.addEventListener('click', loadMoreComments);
-  closerButtonElement.addEventListener('click', closeBigPicture);
-  document.addEventListener('keydown', closeBigPicture);
+  loadComments();
+  loaderButtonElement.addEventListener('click', onLoadMoreCommentsClick);
+  closerButtonElement.addEventListener('click', onCloseBigPicture);
+  document.addEventListener('keydown', onCloseBigPicture);
 };

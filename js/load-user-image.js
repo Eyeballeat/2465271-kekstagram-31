@@ -5,16 +5,16 @@ import {
   effectPreviewElement
 }
   from './source.js';
-// Создаем функцию загрузки изображений пользователя на страницу одновременно со вставкой в превью эффектов
+
 export const onUserImageChange = () => {
   const file = uploadImageInputElement.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FILE_TYPES.some((type) => fileName.endsWith(type));
   if(matches) {
     const blobElement = URL.createObjectURL(file);
     uploadPrewiewInputElement.querySelector('img').src = blobElement;
-    effectPreviewElement.forEach((elem) => {
-      elem.style.backgroundImage = `url(${blobElement})`;
+    effectPreviewElement.forEach((image) => {
+      image.style.backgroundImage = `url(${blobElement})`;
     });
   }
 };

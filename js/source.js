@@ -1,4 +1,3 @@
-//  Создаем константы с переменными и массивами необходимых данных
 const AUTORS = ['Артем', 'Андрей', 'Сергей', 'Владимир', 'Дмитрий', 'Василий', 'Александр', 'Вячеслав', 'Антон', 'Евгений', 'Михаил', 'Денис', 'Мария', 'Татьяна', 'Елена', 'Анастасия', 'Виктория', 'Екатерина', 'Светлана', 'Юлия', 'Юрий', 'Валерия', 'Станислав', 'Ольга', 'Любовь'];
 const DESCRIPTIONS = ['Красота!', 'Вау!', 'Класс!', 'Обожаю!', 'Без комментариев', 'Лучше промолчать!', 'Комментарии здесь излишни!', 'Очень интересная фотография!'];
 const COMMENT_MESSAGES = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
@@ -45,7 +44,6 @@ const imageScaleFormElement = formForUploadImageElement.querySelector('.img-uplo
 
 const effectLevelSliderElement = formForUploadImageElement.querySelector('.effect-level__slider');
 const effectLevelValueElement = formForUploadImageElement.querySelector('.effect-level__value');
-const effectRadioButtonElement = formForUploadImageElement.querySelectorAll('.effects__radio');
 const nonEffectButtonElement = formForUploadImageElement.querySelector('#effect-none');
 const effectListElement = formForUploadImageElement.querySelector('.effects__list');
 const Effects = {
@@ -177,7 +175,6 @@ export {
   imageEffectLevelElement,
   effectLevelSliderElement,
   effectLevelValueElement,
-  effectRadioButtonElement,
   nonEffectButtonElement,
   effectListElement,
   effectPreviewElement,

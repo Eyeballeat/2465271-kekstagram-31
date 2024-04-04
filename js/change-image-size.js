@@ -8,27 +8,31 @@ import {
   scaleValueFieldElement,
 }
   from './source.js';
-// Создаем функцию получения данных и записи их в элемент вывода
-const getCurrentScaleValue = (value) => {
-  let currentScaleValue = parseInt(scaleValueFieldElement.value, 10);
-  currentScaleValue += value;
+/**
+ * Записать значение в поле с масштабом
+ * @param {number} value значение масштаба 25..100
+ */
+const setCurrentScaleValue = (value) => {
+  const currentScaleValue = parseInt(scaleValueFieldElement.value, 10) + value;
   scaleValueFieldElement.value = `${currentScaleValue}%`;
   uploadPrewiewInputElement.firstElementChild.style.transform = `scale(${currentScaleValue / 100})`;
 };
-// Создаем функцию для изменения изображения
+/**
+ * Изменение масштаба
+ */
 const changePictureSize = (evt) => {
   if (evt.target === scaleSmallerButtonElement) {
     if (scaleValueFieldElement.value === `${MIN_IMAGE_SIZE}%`) {
       return;
     }
-    getCurrentScaleValue(-PICTURE_SCALE_STEP);
+    setCurrentScaleValue(PICTURE_SCALE_STEP * -1);
   }
   if (evt.target === scaleBiggerButtonElement) {
     if (scaleValueFieldElement.value === `${FULL_IMAGE_SIZE}%`) {
       return;
     }
-    getCurrentScaleValue(PICTURE_SCALE_STEP);
+    setCurrentScaleValue(PICTURE_SCALE_STEP);
   }
 };
-// Создаем колбэк для передачи в обработчик
+
 export const onPictureSizeClick = (evt) => changePictureSize(evt);

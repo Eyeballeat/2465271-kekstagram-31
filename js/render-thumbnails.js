@@ -2,8 +2,8 @@ import { pictureContainerElement,
   templatePictureFragmentElement
 }
   from './source.js';
-import { onPostClick } from './full-size-image-renderer.js';
-// Создаем функцию для вставки изображений полученных с сервера на страницу
+import { onPostClick } from './render-full-size-image.js';
+
 export const insertImageElement = (data) => {
   data.forEach ((postElement) => {
     const template = templatePictureFragmentElement.cloneNode(true);

@@ -35,4 +35,4 @@ const changePictureSize = (evt) => {
   }
 };
 
-export const onPictureSizeClick = (evt) => changePictureSize(evt);
+export const onChangeSizeButtonClick = (evt) => changePictureSize(evt);

@@ -7,7 +7,7 @@ const getTemplateElement = (templateId, selector) => {
   );
 };
 
-const debounce = (callback, timeoutDelay) => {
+const removeDebounce = (callback, timeoutDelay) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
@@ -18,5 +18,5 @@ const debounce = (callback, timeoutDelay) => {
 export {
   isEscapeButton,
   getTemplateElement,
-  debounce,
+  removeDebounce,
 };

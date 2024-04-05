@@ -12,10 +12,10 @@ import {
   MESSAGE_COUNT,
 }
   from './source.js';
-import { onPictureSizeClick } from './change-image-size.js';
-import { onUserImageChange } from './load-user-image.js';
+import { onChangeSizeButtonClick } from './change-image-size.js';
+import { loadUserLocalImage } from './load-user-image.js';
 import { onCurrentPostDataSubmit, successUploadMessage, errorUploadMessage } from './image-sending.js';
-import { onSuccessMessageClick, onErrorMessageClick } from './close-modal-windows.js';
+import { onSuccessButtonClick, onErrorButtonClick } from './close-modal-windows.js';
 import { isEscapeButton } from './utils.js';
 /**
    * Инициализация Pristine для валидации формы ввода.
@@ -38,7 +38,7 @@ const checkHashtagOnCorrect = () =>
 const checkHashtagOnRepeat = () => new Set(prepareHashtag()).size === prepareHashtag().length;
 const checkHashtagStringLength = () => prepareHashtag().length <= MESSAGE_COUNT;
 
-const onPictureCloserClick = () => {
+const onPictureCloserButtonClick = () => {
   document.body.classList.remove('modal-open');
   uploadOverlayElement.classList.add('hidden');
   imageEffectLevelElement.style.display = 'none';
@@ -46,31 +46,31 @@ const onPictureCloserClick = () => {
   pristine.reset();
   formForUploadImageElement.reset();
   successUploadMessage.remove();
-  document.removeEventListener('keydown', onEscapePress);
+  document.removeEventListener('keydown', onEscapeButtonPress);
 };
 
-function onEscapePress (evt) {
+function onEscapeButtonPress (evt) {
   if (document.activeElement === textInHashTagInputElement
     || document.activeElement === textInDescriptionInputElement) {
     evt.stopPropagation();
   } else if (document.querySelector('.error')) {
     errorUploadMessage.remove();
   } else if(isEscapeButton(evt)) {
-    onPictureCloserClick();
+    onPictureCloserButtonClick();
   }
 }
 
-const validationOfForm = () => {
+const checkUserForm = () => {
   formForUploadImageElement.addEventListener('change', () => {
     uploadOverlayElement.classList.remove('hidden');
     document.body.classList.add('modal-open');
-    uploadImageInputElement.addEventListener('change', onUserImageChange());
-    imageScaleFormElement.addEventListener('click', onPictureSizeClick);
+    uploadImageInputElement.addEventListener('change', loadUserLocalImage());
+    imageScaleFormElement.addEventListener('click', onChangeSizeButtonClick);
     formForUploadImageElement.addEventListener('submit', onCurrentPostDataSubmit);
-    buttonForCancelElement.addEventListener('click', onPictureCloserClick);
-    document.addEventListener('keydown', onEscapePress);
-    successUploadMessage.addEventListener('click', onSuccessMessageClick);
-    errorUploadMessage.addEventListener('click', onErrorMessageClick);
+    buttonForCancelElement.addEventListener('click', onPictureCloserButtonClick);
+    document.addEventListener('keydown', onEscapeButtonPress);
+    successUploadMessage.addEventListener('click', onSuccessButtonClick);
+    errorUploadMessage.addEventListener('click', onErrorButtonClick);
   });
 };
 
@@ -80,7 +80,7 @@ pristine.addValidator(textInHashTagInputElement, checkHashtagOnCorrect, 'хэш�
 pristine.addValidator(textInHashTagInputElement, checkHashtagOnRepeat, 'хэштеги не должны повторяться');
 
 export {
-  validationOfForm,
+  checkUserForm,
   pristine,
-  onPictureCloserClick
+  onPictureCloserButtonClick
 };

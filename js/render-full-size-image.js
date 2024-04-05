@@ -74,7 +74,7 @@ const loadComments = () => {
 
 const onLoadMoreCommentsClick = () => loadComments();
 
-export const onPostClick = (post) => {
+export const showUserPost = (post) => {
   const picture = getPostbyId(post);
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');

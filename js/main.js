@@ -1,6 +1,6 @@
 import { getData } from './api.js';
 import { changePictureEffect } from './overlay-effects.js';
-import { validationOfForm } from './edit-of-user-form.js';
+import { checkUserForm } from './edit-of-user-form.js';
 import { setPostsData } from './user-state.js';
 import { getFilteredPictures, showPictureFilterElement, showImageFilter } from './image-filter.js';
 import { showErrorMessage } from './error-popup.js';
@@ -15,5 +15,5 @@ getData()
     showErrorMessage(err.Text);
   });
 changePictureEffect();
-validationOfForm();
+checkUserForm();
 showPictureFilterElement();

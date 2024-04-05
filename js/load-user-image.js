@@ -1,15 +1,15 @@
 import {
-  FILE_TYPES,
+  fileTypes,
   uploadImageInputElement,
   uploadPrewiewInputElement,
   effectPreviewElement
 }
   from './source.js';
 
-export const onUserImageChange = () => {
+export const loadUserLocalImage = () => {
   const file = uploadImageInputElement.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((type) => fileName.endsWith(type));
+  const matches = fileTypes.some((type) => fileName.endsWith(type));
   if(matches) {
     const blobElement = URL.createObjectURL(file);
     uploadPrewiewInputElement.querySelector('img').src = blobElement;

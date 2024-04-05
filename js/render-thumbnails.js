@@ -2,7 +2,7 @@ import { pictureContainerElement,
   templatePictureFragmentElement
 }
   from './source.js';
-import { onPostClick } from './render-full-size-image.js';
+import { showUserPost } from './render-full-size-image.js';
 
 export const insertImageElement = (data) => {
   data.forEach ((postElement) => {
@@ -18,7 +18,7 @@ export const insertImageElement = (data) => {
     like.innerText = postElement.likes;
     pictureContainerElement.append(template);
     link.addEventListener('click', () => {
-      onPostClick(postElement.id);
+      showUserPost(postElement.id);
     });
   });
 };

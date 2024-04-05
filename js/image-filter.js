@@ -7,7 +7,7 @@ import {
   MAX_SHOWER_PHOTO
 }
   from './source.js';
-import { debounce } from './utils.js';
+import { removeDebounce } from './utils.js';
 import { showErrorMessage } from './error-popup.js';
 import { setPostsData } from './user-state.js';
 import { insertImageElement } from './render-thumbnails.js';
@@ -28,7 +28,7 @@ const getFilteredPictures = (data) => {
     'filter-default': data,
     'filter-random': data.slice().sort(sortByRandomId).slice(0,MAX_SHOWER_PHOTO),
     'filter-discussed': data.slice().sort(sortByComments),
-    active: function () {
+    applySelectedFilter() {
       imageFilterFormElement.querySelectorAll('.img-filters__button').forEach((elem) => {
         if (elem.classList.contains('img-filters__button--active')) {
           insertImageElement (this[elem.id]);
@@ -36,14 +36,14 @@ const getFilteredPictures = (data) => {
       });
     }
   };
-  СurrentPictureFilters.active();
+  СurrentPictureFilters.applySelectedFilter();
 };
 
 const showImageFilter = () => {
   imageFiltersElement.classList.remove('img-filters--inactive');
 };
 
-const onActiveElementChange = (evt) => {
+const changeActiveFilterElement = (evt) => {
   imageFilterFormElement.querySelectorAll('.img-filters__button')
     .forEach((filter) => filter.classList.remove('img-filters__button--active'));
   evt.target.classList.add('img-filters__button--active');
@@ -51,7 +51,7 @@ const onActiveElementChange = (evt) => {
 
 const showFilterElements = (cb) => {
   imageFilterFormElement.addEventListener('click', (evt) => {
-    onActiveElementChange(evt);
+    changeActiveFilterElement(evt);
     cb();
   });
 };
@@ -68,7 +68,7 @@ const showSortPictures = () => {
 };
 
 const showPictureFilterElement = () => {
-  showFilterElements(debounce(() => showSortPictures(), RERENDER_DELAY));
+  showFilterElements(removeDebounce(() => showSortPictures(), RERENDER_DELAY));
 };
 
 export {

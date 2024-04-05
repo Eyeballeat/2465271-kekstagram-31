@@ -1,5 +1,5 @@
 import {
-  imageUploadButtonText,
+  ImageUploadButtonText,
   imageUploadButtonElement,
   errorUploadTitleElement,
   successUploadTitleElement
@@ -29,12 +29,12 @@ const showUploadSuccessMessage = (message) => {
 
 const unblockSubmitButton = () => {
   imageUploadButtonElement.disabled = false;
-  imageUploadButtonElement.textContent = imageUploadButtonText.IDLE;
+  imageUploadButtonElement.textContent = ImageUploadButtonText.IDLE;
 };
 
 const blockSubmitButton = () => {
   imageUploadButtonElement.disabled = true;
-  imageUploadButtonElement.textContent = imageUploadButtonText.SENDING;
+  imageUploadButtonElement.textContent = ImageUploadButtonText.SENDING;
 };
 
 const sendUserImageForm = (evt) => {

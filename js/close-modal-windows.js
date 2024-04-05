@@ -1,14 +1,14 @@
 import { errorUploadMessage } from './image-sending.js';
-import { onPictureCloserClick } from './edit-of-user-form.js';
+import { onPictureCloserButtonClick } from './edit-of-user-form.js';
 
-const onSuccessMessageClick = (evt) => {
+const onSuccessButtonClick = (evt) => {
   if (evt.target === document.querySelector('.success__button')
   || evt.target === document.querySelector('.success')) {
-    onPictureCloserClick(evt);
+    onPictureCloserButtonClick(evt);
   }
 };
 
-const onErrorMessageClick = (evt) => {
+const onErrorButtonClick = (evt) => {
   if (evt.target === document.querySelector('.error__button')
     || evt.target === document.querySelector('.error')) {
     errorUploadMessage.remove();
@@ -16,6 +16,6 @@ const onErrorMessageClick = (evt) => {
 };
 
 export {
-  onSuccessMessageClick,
-  onErrorMessageClick
+  onSuccessButtonClick,
+  onErrorButtonClick
 };
